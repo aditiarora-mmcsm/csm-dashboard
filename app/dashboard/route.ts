@@ -30,7 +30,8 @@ export async function GET(request: NextRequest) {
   }
 
   // ── 2. Fetch user profile ───────────────────────────────────────
-  const { data: profile } = await supabase
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: profile } = await (supabase as any)
     .from('users')
     .select('id, email, name, role, spoc_name, avatar_url')
     .eq('id', session.user.id)
