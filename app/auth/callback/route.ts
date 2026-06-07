@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     // Ensure user row exists (the trigger handles new signups,
     // but run an upsert here as a safety net)
     const { user } = data.session!;
-    await supabase.from('users').upsert({
+    await (supabase.from('users') as any).upsert({
       id:         user.id,
       email:      user.email!,
       name:       user.user_metadata?.full_name ?? user.email!.split('@')[0],
